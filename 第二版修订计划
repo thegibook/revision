@@ -1,0 +1,70 @@
+1. 方差属性加入两个独立随机变量乘积的方差
+2. 回归和概率密度估计加入公式，梳理核密度估计和非参数回归两部分的内容
+3. Gamma矫正相关，光度学
+4. 辐射度量和渲染方程部分，将辐射亮度的不变性强调一下，并以此调整更好的解
+5. 简化难度处理，以更清晰的逻辑，知识间的联系描述比较晦涩的，主要是从使更易于理解的层次上简化，而不是减少内容，当然一些不必要或者复杂的公式也在简化之列
+6. media 2017 Lighting Grid Hierarchy for Self-illuminating Explosions
+7. 收敛符号及概念
+8. 引入Renderman，UnrealEngine之类工具的逻辑，是为了讲解原理或功能，不是为了讲述工具，仅用于举例或者工业实践中对原理的进一步解释或者补充，能够促进理解
+9. 将“大数定律”一节调整为“极限定理”，分别包含遍历定理和大数定律两个极限定律
+10. MIS也许没讲清楚，或者BPT中的MIS没讲清楚，MIS中的每个Technique是一个完整的采样，就是一条完整的路径，而不是对来自光源和摄像机的两条半路径进行重要性组合 Nor- mally this is done by explicitly partitioning the integration domain into regions that are sampled differently. BPT跟MIS是没有关系的，它仅在于提升了收敛速度，而与重要性无关，MIS主要是指从被积函数的不同分布特征抽取出来作为采样的概率密度分布，从BRDF或从光源面积，此部分很严重 95 Optimally Combining Sampling Techniques for Monte Carlo Rendering.pdf 比如bpt和vcm两种不同采样方法，各种产生独立路径，独立样本；该论文列举了几种不同采样方法下的MIS方案，对于BPT，可以以路径长度为依据划分为不同的采样技术，然后进行MIS计算；长度和采样技术的区别，长度是个大分类，不是采样技术的概念，采样技术是针对单个长度而言的。
+11. 觉得公式太多，或者不易于理解的地方，增加或者补充配图加强描述
+12. 复杂句子，语法逻辑不太清晰的，简化
+13. 统一的收敛性标记：https://en.wikipedia.org/wiki/Big_O_notation，术语：例如pdf称谓，光泽反射，焦散等
+14. 针对彩色配图的优化，全部尽可能矢量配图
+15. 建立一个统一的符号列表，有新的符号添加到表中，然后后面的符号都使用表中符号，保持一致
+16. 算法描述风格尽量一致
+17. 列出一个针对源代码或项目的索引列表
+18. 补充一节参与媒介到路径追踪一章, denoising
+19. 解释重要性采样中每个样本产生相同贡献的含义，被积函数正比于概率密度，所以比值为一个常数，当被积函数值大时，采样概率也大，反正亦然，因此维持一个常数，因为如果某些样本的比值不一样，说明该样本更重要或更不重要，需要调整采样概率密度。既然各个样本的贡献值相同，因此当MLT做到被积函数完全正比于概率密度函数时，我们就依赖于数样本数量即可，传统的MC方法不同，因为每个样本贡献值不一样，即pdf不正比与被积函数，因此存在较大的方差，MIS就是试图使每个样本的贡献值相同来合并多个重要性采样的样本
+20. 修订的时候重点针对RenderMan做一些内容优化，并在后面的介绍宣传中强调，如封面
+21. 蒙特卡洛方法基本概念优化：三个基本概念或者元素或组件：throughput，pdf，contribution
+22. One way to tackle this problem is to store some of the computed illumination and use it for generating the im- age. This idea is exploited in different forms by several ap- proaches, like the photon mapping [Jen96], the light vol- ume [CZS96], the irradiance cache [WRC88], the irradiance volume [GSHG98], or the light field [LH96].
+23. “A comprehensive theory of volumetric radiance estimation using photon points and beams” Lastly, our unified theory provides new insights into how seem- ingly distinct volume rendering methods are in fact extremely simi- lar. In addition to volumetric photon mapping, we show how virtual point-light methods [Keller 1997; Walter et al. 2006], light beam tracing methods [Nishita et al. 1987; Watt 1990; Nishita and Naka- mae 1994], and deep shadow maps [Lokovic and Veach 2000] can all be seen as special cases or slight modifications of our theory.
+24. 复合重要性采样的启发式原理没有讲述清楚，怎样使方差最小，以及使用的数学原理，权重系数的和为1，这是基本条件（可能保证无偏），然后在这个条件下使方差最小
+25. Bxdfs：layered material（path tracing in RenderMan）
+26. subsurface scattering的专门内容，16 The Path to Path-Traced Movies 5.3.3 BSSRDF目录
+27. image-space的一些方法
+28. voxel一章要讨论一些voxel渲染通用的方法
+29. Russian roulette 有两种用法，一种仅作为终止条件（可以看做权重为1和0），一种作为一个权重系数直到满足某个边界终止条件
+30. VCM/UPS加入13 Path Space Regularization for Holistic and Robust Light Transport相关内容，Note that unbiased (MC)MC methods, including manifold exploration, can- not sample all transport paths, which requires regularization [Ka- planyan and Dachsbacher 2013b].
+31. MC participating media：joint sampling
+32. 在MIS之后将三者之间的参与介质方法统一为一章，或者看还需要不需要靠后，或者先不管，到全书结束之后一章，或可考虑实时内容，将介质当做一种独立于表面的内容，并且把Subscattering，发毛，皮肤等加到一起，以区别于表面渲
+33. Russian Roulette与取舍算法之间的区别：1990 Particle transport and image synthesis
+34. DOF和motion blur，加入到过滤那里？还是？可以加入到过滤作为基础介绍，其它地方可以介绍特点方法，比肩这不是大块内容
+35. Image-space和participating media形成两个独特综合性章节？
+36. 97 Robust Monte Carlo Methods for Light Transport Simulation.pdf对balance heuristic的证明和说明
+37. 最后的针对摄像机传感器的加权项（和最后一个顶点有关），即过滤项，和平均1/N是不一样的，平均是蒙特卡洛的特性，而加权是处理一个像素的面积
+38. 蒙特卡洛方法一章抽样方法中加入仿射变换法，这是后面RJMLT中可逆跳跃算法的基础：http://www.math.uah.edu/stat/dist/Transformations.html
+39. 全书结构，每个章节末的总结有点重复和多余，实际自身感受用途不大；将这部分移至下一章的开头，不但能够总结，还能列出不足并直接与下一章的内容产生联系，以便于清楚下一章的目标，这样每章的开头更具有分量。当然这种方法是本书各种GI技术具有相互联系的结果，不适用于并行性不相关的内容，但本书中大部分GI之间都是有联系的，因此能够更好地阐述逻辑，这点在前言中说明。
+40. 光线路径的样本来自所有采样随机数（0-1之间）组成的hypercube样本空间，我们需要这个高维的hybercube空间内的样本分布均匀，而不仅仅是单个1维采样函数的分布均匀，这是quasi-MC的，需要在相关地方说明，需要使用高维分布
+41. 说明均匀和非均匀采样下的蒙特卡洛积分
+42. 实例说明MIS的计算方法，强调是针对同一路径，不同的采样技术，它遍历路径各个顶点，使用从不同的边采样来形成k+2种采样技术，示例：http://www.ci.i.u-tokyo.ac.jp/~hachisuka/smallmmlt.cpp
+43. 路径采样并不是作用于measurement space，而是作用于sampling domain of outgoing directions（or projected solid angle），因此基于方向采样的空间primary sample space才是全空间，而测度空间只是部分子空间有效，它们之间的转换就涉及变量的变化（a change of variables），这就是几何项的意义，它表示一个雅可比行列式，方向变化和面积变化的比值，说明G被隐藏与BRDF中
+44. 每个公式必须保持引用序号，这是因为读者在查询一个位置较远的公式时，需要使用序号进行查找，而如果只有少数公式被标有序号，则读者很难进行查找，所以每个公式被标序号有助于快速查找引用公式
+45. 光线微分部分关于局部几何信息，如位置和法线导数的更清晰的解释和说明
+46. The State of Rendering中有关于各个渲染器的介绍
+47. Image-based Lighting
+48. multi-layer materials
+49. 三角形网格的插值计算，barycentric coordinates，这是一个非正交的局部坐标，纹理在读取是还需要转换至纹理坐标，这样对于一些局部方法才是有效的，例如ME和HSLT，否则局部参数表述仅适用于该三角面
+50. Manifold next event estimate
+51. MMLT重新整理：序列的划分是对同一路径的不同采样技术之间，这样保证每个序列都可以包含所有路径，只是效率不一样，这样才需要在序列之间转移；因此，路径中的采样是由原采样空间的t唯一决定的，所有本质上路径是可以改变长度，即可以在不同长度之间转移，但是MMLT选择对每个长度使用一个单独的Markov chain，为了计算效率问题
+52. 超薄表面渲染diffusion theory，diffusion dipole model,
+53. 关于渲染方程，分三部分按不同的理解程度讲解：首先在第一章，我们只讲述了局部的光学交互，还没有全局光照的概念，此时只说明基于方向的迭代形式的简单积分公式，但是要说明半矢量以及相互转换关系，包含半矢量变换其实是对方向的变换的积分，这样才形成半矢量到出射方向的转变；第二部分是在路径追踪的开头部分讲述路径形式的积分公式，包含几何项雅可比矩阵，此时还有说明路径的长度，因为每个长度使用不同的积分公式；最后在将BDPT时才引入采样技术的概念。
+54. Parallel tempering，replica-exchange 16 Improving Global Exploration of MCMC Light Transport Simulation，Increasing roughness of BRDF leads to regularization of the simulated and flatter target function
+55. 辐射度量中对光源表述更清晰的解释
+56. 漫反射BRDF中的归一化向pi，在非漫反射中能量守恒必须集成到BRDF中去，所以光泽反射中没有pi项
+57. post-processing加到渲染管线那一章，包括HDR，tone-mapping
+58. 加入关于Denosing的内容到着色管线一章，目前只有常见的反走样技术，可以适当加入点其它denosing技术，但是可能和后面PT中的内容有重合，或者在PT中加入一个实时分支，但是在渲染管线一章加以说明
+59. Displacement mapping，normal map这些在哪里放，RTR中是一个单独的Texturing章节
+60. environment mapping，reflection mapping，rtr. 8，由于Environment Mapping是PRT中的内容，所以将Texturing放在第一章的材质模型部分，或者单独一节
+61. pbr部分看看SIGGRAPH 2017courses
+62. BRDF加入Multiscale？Layered BRDF，2017 Physically based material where are we？
+63. 2017 Spectral and Decomposition Tracking for Rendering Heterogeneous Volumes
+64. 把内积和正交化投影放到傅里叶变换之前，并单独作为数学基础知识描述傅里叶变种，重点介绍信号通过修改频率域实现压缩和去噪的思路
+65. 能去掉的尽可能去掉我们
+66. energy redistribution path tracing
+67. 解释microfacet brdf中分母的空间变换意义，雅可比矩阵
+68. 反射方程能量守恒的含义，使用The directional-hemispherical reflectance R(l) is a function related to the BRDF. It can be used to measure to what degree a BRDF is energy- conserving. Despite its somewhat daunting name, the directional-hemi- spherical reflectance is a simple concept. It measures the amount of light coming from a given direction that is reflected at all, regardless of out- going direction. Essentially, it measures energy loss for a given incoming direction. The input to this function is the incoming direction vector l, and its definition is the ratio between differential exitance and differential irradiance 它表示入射照度与所有反射方向出射照度的比值，能够说明能量守恒，因此只与入射方向无关。
+69. BRDF部太过晦涩，并且不是很清晰，要花时间加长篇幅，并提高解释的深度和理解的清晰度，pbrt，rtr
+70. 随机变量的相关性
