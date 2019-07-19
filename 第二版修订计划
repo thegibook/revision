@@ -68,3 +68,5 @@
 68. 反射方程能量守恒的含义，使用The directional-hemispherical reflectance R(l) is a function related to the BRDF. It can be used to measure to what degree a BRDF is energy- conserving. Despite its somewhat daunting name, the directional-hemi- spherical reflectance is a simple concept. It measures the amount of light coming from a given direction that is reflected at all, regardless of out- going direction. Essentially, it measures energy loss for a given incoming direction. The input to this function is the incoming direction vector l, and its definition is the ratio between differential exitance and differential irradiance 它表示入射照度与所有反射方向出射照度的比值，能够说明能量守恒，因此只与入射方向无关。
 69. BRDF部太过晦涩，并且不是很清晰，要花时间加长篇幅，并提高解释的深度和理解的清晰度，pbrt，rtr
 70. 随机变量的相关性
+71. 傅里叶变换的ringing现象
+72. Spectral Rendering：spectral transport，upsampling of RGB texture，etc.
